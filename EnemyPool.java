@@ -77,8 +77,9 @@ public class EnemyPool {
         return ret;
     }
 
-    public void Delete (GameObject enemy) {
+    public void Delete (Enemy enemy) {
         enemy.hide();
+        enemy.getImage().makeInvisible();
         if(endLeft.contains(enemy)) {
             endLeft.remove(enemy);
         }
@@ -91,7 +92,7 @@ public class EnemyPool {
 
     public void Delete (ArrayList<Enemy> enemies) {
         for(Enemy obj : enemies) {
-            Delete(obj);
+            this.Delete(obj);
         }
     }
 

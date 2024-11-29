@@ -16,7 +16,7 @@ public class Collisions {
 
             //TODO kazdy bullet bude mat vlastny array kde pri vystrele prida vsetkych ktorych vobec moze trafit a pozera sa len na vysku a az potom pozicu X 
             for (Bullet bullet : bullets) {
-                
+
                 int y = bullet.getY();
                 if(y < 0) {
 
@@ -25,24 +25,27 @@ public class Collisions {
                 }
                 int x = bullet.getX();
 
+                enemyForEach:
                 for (Enemy enemy : enemies) {
                     //TODO idk whats happening
                     if(enemy.checkColision(x, y)) {
                         System.out.println("hit");
                         enemiesDelete.add(enemy);
                         bulletsDelete.add(bullet);
+                        break enemyForEach;
                     }
                 }
             }
-            EnemyPool.getInstance().Delete(enemiesDelete);
             BulletPool.getInstance().Delete(bulletsDelete);
+            EnemyPool.getInstance().Delete(enemiesDelete);
+            
             //this.isChanged = false;
         } else {
             return;
         }
     }
 
-    public void changed() {
+    private void changed() {
         this.isChanged = true;
     }
 

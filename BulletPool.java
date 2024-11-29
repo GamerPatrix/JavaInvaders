@@ -33,6 +33,7 @@ public class BulletPool {
     }
 
     public void Delete (Bullet bullets) {
+        bullets.hide();
         pool.remove(bullets);
     }
 

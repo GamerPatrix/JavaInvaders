@@ -3,19 +3,11 @@ public class GameObject
 {
     private BoundingBox box;
     private Image image;
-    private Object objectType;
-    /**
-     * Constructor for objects of class MyObrazok
-     */
     public GameObject()
     {
         image = new Image("pics\\Empty.png");
         image.makeVisible();
         box = new BoundingBox();
-    }
-
-    public void setObjectType(Object obj) {
-        this.objectType = obj;
     }
     
     public void changeImage(String path) {
