@@ -7,37 +7,37 @@ public class Collisions {
     }
 
     public void checkColisions() {
-        if(this.isChanged) {
+        if (this.isChanged) {
 
             Bullet[] bullets = BulletPool.getInstance().getBullets();
             Enemy[] enemies = EnemyPool.getInstance().getEnemyArray();
             ArrayList<Enemy> enemiesDelete = new ArrayList<Enemy>();
             ArrayList<Bullet> bulletsDelete = new ArrayList<Bullet>();
 
-            //TODO kazdy bullet bude mat vlastny array kde pri vystrele prida vsetkych ktorych vobec moze trafit a pozera sa len na vysku a az potom pozicu X 
+            // when there is only one bullet in the scene it doesnt destroy the enemy for some reason
             for (Bullet bullet : bullets) {
 
                 int y = bullet.getY();
-                if(y < 0) {
+                if (y < 0) {
 
                     bulletsDelete.add(bullet);
                     continue;
                 }
                 int x = bullet.getX();
 
-                enemyForEach:
-                for (Enemy enemy : enemies) {
-                    //TODO idk whats happening
-                    if(enemy.checkColision(x, y)) {
-                        System.out.println("hit");
+                //enemyForEach:
+                for (Enemy enemy : enemies) {                
+                    if (enemy.checkColision(x, y)) {
+                        //System.out.println("hit");
                         enemiesDelete.add(enemy);
                         bulletsDelete.add(bullet);
-                        break enemyForEach;
+                        //break enemyForEach;
+                        
                     }
                 }
             }
-            BulletPool.getInstance().Delete(bulletsDelete);
-            EnemyPool.getInstance().Delete(enemiesDelete);
+            BulletPool.getInstance().delete(bulletsDelete);
+            EnemyPool.getInstance().delete(enemiesDelete);
             
             //this.isChanged = false;
         } else {

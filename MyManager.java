@@ -5,8 +5,7 @@ import fri.shapesge.Manager;
  * @author (your name)
  * @version (a version number or a date)
  */
-public abstract class MyManager
-{   
+public abstract class MyManager {   
     private static Manager instance;
     
     public static Manager getInstance() {

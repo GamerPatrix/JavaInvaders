@@ -10,18 +10,18 @@ public class Hra {
     private static Hra instance;
     private static GameState gameState;
     private Manager manager;
-    private Casovac cas;
+    //private Casovac cas;
     private boolean isRunnung;
     private ArrayList<Object> objekty;
     public Hra() {
         this.manager = MyManager.getInstance();
-        objekty = new ArrayList<Object>();
-        objekty.add(BulletPool.getInstance());
-        objekty.add(EnemyPool.getInstance());
-        objekty.add(OvladanieHracom.getInstance());
-        cas = new Casovac(this);
+        this.objekty = new ArrayList<Object>();
+        this.objekty.add(BulletPool.getInstance());
+        this.objekty.add(EnemyPool.getInstance());
+        this.objekty.add(OvladanieHracom.getInstance());
+        //this.cas = new Casovac(this);
         this.manager.manageObject(this);
-        
+
         System.out.println("game" );
         //this.manager.spravujObjekt(this);
         //EnemyPool.getInstance().createEnemyGrid(30, 3, 3);
@@ -31,17 +31,17 @@ public class Hra {
         this.checkCollisions();
         this.tryMoveEnemies();
         this.tryMoveBullets();
-        
+
     }
-    
+
     private void tryMoveEnemies() {
-         EnemyPool.getInstance().update();
+        EnemyPool.getInstance().update();
     }
-    
-     private void tryMoveBullets() {
-         BulletPool.getInstance().update();
+
+    private void tryMoveBullets() {
+        BulletPool.getInstance().update();
     }
-        
+
     private void checkCollisions() {
         Collisions.getInstance().checkColisions();
     }
@@ -78,7 +78,7 @@ public class Hra {
     }
 
     public void goToMainMenu() {
-        if(isRunnung) {
+        if (this.isRunnung) {
             this.end();  
         }
         this.hideGame();
@@ -93,7 +93,8 @@ public class Hra {
     }
 
     public static GameState getGameState() {
-        return gameState;
+        GameState ret = gameState;
+        return ret;
     }
     public enum GameState {
         MainMenu, Paused, Running,

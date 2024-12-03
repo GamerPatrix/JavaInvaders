@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Scanner;
 /**
  * Write a description of class EnemyPool here.
  * 
@@ -19,44 +17,44 @@ public class EnemyPool {
     private int minHeight;
     private int rightSide;
     private EnemyPool() {
-        pool = new ArrayList<Enemy>(); 
-        endLeft = new ArrayList<Enemy>(); 
-        endRight = new ArrayList<Enemy>(); 
-        speed = 6;
-        allwedMoveDistance = 10;
-        actualMoveDistance = 0;
-        isright = true;
-        minHeight = 90;        
-        rightSide = 1000;
+        this.pool = new ArrayList<Enemy>(); 
+        this.endLeft = new ArrayList<Enemy>(); 
+        this.endRight = new ArrayList<Enemy>(); 
+        this.speed = 6;
+        this.allwedMoveDistance = 10;
+        this.actualMoveDistance = 0;
+        this.isright = true;
+        this.minHeight = 90;        
+        this.rightSide = 1000;
     }
 
     public int getMinHeight() {
-        return minHeight;
+        return this.minHeight;
     }
 
     private Enemy createEnemy(int x, int y) {
         Enemy a = new Enemy();
-        a.SetPos(x, y);
-        pool.add(a);
+        a.setPos(x, y);
+        this.pool.add(a);
         return a;
     }
     //move is supposed to be different
     public void update() {
-        if(checkEdge()) {
-            isright=!isright;
-            for(Enemy obj : pool) {
-                obj.moveY(speed);
+        if (this.checkEdge()) {
+            this.isright = !this.isright;
+            for (Enemy obj : this.pool) {
+                obj.moveY(this.speed);
             }
         }
 
         int distance;
-        if(isright) {
-            distance = speed;
+        if (this.isright) {
+            distance = this.speed;
         } else {
-            distance = -speed;
+            distance = -this.speed;
         }
 
-        for(Enemy obj : pool) {
+        for (Enemy obj : this.pool) {
             obj.moveX(distance);
         }
     }
@@ -71,44 +69,50 @@ public class EnemyPool {
 
     public Enemy[] getEnemyArray() {
         Enemy[] ret = new Enemy[this.pool.size()];
-        for(int i = 0; i < ret.length; i++) {
+        for (int i = 0; i < ret.length; i++) {
             ret[i] = this.pool.get(i);
         }
         return ret;
     }
 
-    public void Delete (Enemy enemy) {
+    public void delete (Enemy enemy) {
         enemy.hide();
-        enemy.getImage().makeInvisible();
-        if(endLeft.contains(enemy)) {
-            endLeft.remove(enemy);
+        //when hide is called only once it doesnt hide
+        enemy.hide();
+        
+        if (this.endLeft.contains(enemy)) {
+            this.endLeft.remove(enemy);
         }
-        if (endRight.contains(enemy)) {
-            endRight.remove(enemy);
+        if (this.endRight.contains(enemy)) {
+            this.endRight.remove(enemy);
         }
-        pool.remove(enemy);
+        this.pool.remove(enemy);
+        
+        this.numberOfAttemptsR = 0;
+        this.numberOfAttemptsL = 0;
         this.checkEdgeArrays();
+        
     }
 
-    public void Delete (ArrayList<Enemy> enemies) {
-        for(Enemy obj : enemies) {
-            this.Delete(obj);
+    public void delete (ArrayList<Enemy> enemies) {
+        for (Enemy obj : enemies) {
+            this.delete(obj);
         }
     }
 
-    public void createEnemyGrid(int spacing,int numberX, int numberY) {
+    public void createEnemyGrid(int spacing, int numberX, int numberY) {
         int created = 0;
         int x = 10;
         int y = 10;
 
-        for(int i = 0; i < numberY; i++){
-            for(int j = 0; j < numberX; j++) {
+        for (int i = 0; i < numberY; i++) {
+            for (int j = 0; j < numberX; j++) {
                 x += spacing;
-                Enemy a = createEnemy(x, y);
-                if(j==0) {
-                    endLeft.add(a);                    
-                } else if(j== (numberX-2) ){
-                    endRight.add(a);                    
+                Enemy a = this.createEnemy(x, y);
+                if (j == 0) {
+                    this.endLeft.add(a);                    
+                } else if (j == (numberX - 2)) {
+                    this.endRight.add(a);                    
                 }
                 created++;
             }
@@ -119,16 +123,16 @@ public class EnemyPool {
     }
 
     private boolean checkEdge() {
-        if(isright) {
-            for(Enemy obj : endRight) {
-                if(obj.getEndX()>this.rightSide) {
+        if (this.isright) {
+            for (Enemy obj : this.endRight) {
+                if (obj.getEndX() > this.rightSide) {
                     return true;
                 }
             }
             return false;
         } else {
-            for(Enemy obj : endLeft) {
-                if(obj.getX()<0) {
+            for (Enemy obj : this.endLeft) {
+                if (obj.getX() < 0) {
                     return true;
                 }
             }
@@ -137,46 +141,69 @@ public class EnemyPool {
 
     }
 
+    private int numberOfAttemptsR;
+    private int numberOfAttemptsL;
     private void checkEdgeArrays() {
         //najdi najvedcise potom ziskaj vsetky v rovnakej vzdialenosti
-        if(endRight.isEmpty()) {
-            int max = Integer.MIN_VALUE;
-            int tmpx = 0;
-            Enemy maxE = null;
-            for(Enemy obj : pool) {
-                tmpx = obj.getX();
-                if( tmpx > max) {
-                    max = tmpx;
-                    maxE = obj;
+        this.checkEdgeArrays(true);
+        this.checkEdgeArrays(false);
+    }
+
+    private void checkEdgeArrays(boolean isRight) {
+        if (this.isright) {
+            if (this.endRight.isEmpty()) {
+                int max = Integer.MIN_VALUE;
+                int tmpx = 0;
+                Enemy maxE = null;
+                for (Enemy obj : this.pool) {
+                    tmpx = obj.getX();
+                    if (tmpx > max) {
+                        max = tmpx;
+                        maxE = obj;
+                    }
+                }
+                if (maxE == null) {
+                    //checkEdgeArrays(true);
+                    this.numberOfAttemptsR++;
+                    return;
+                }
+                int eX = maxE.getX();
+                for (Enemy obj : this.pool) {
+
+                    if (eX == obj.getX()) {
+                        this.endRight.add(obj);
+                    }
                 }
             }
-            int eX = maxE.getX();
-            for(Enemy obj : pool) {
-
-                if( eX == obj.getX()) {
-                    endRight.add(obj);
+        } else { 
+            if (this.endLeft.isEmpty()) {
+                int min = Integer.MAX_VALUE;
+                int tmpx = 0;
+                Enemy minE = null;
+                for (Enemy obj : this.pool) {
+                    tmpx = obj.getX();
+                    if ( tmpx < min) {
+                        min = tmpx;
+                        minE = obj;
+                    }
+                }
+                if (minE == null && this.numberOfAttemptsL < 5) {
+                    //checkEdgeArrays(true);
+                    this.numberOfAttemptsL++;
+                    return;
+                } else if (minE != null) {
+                    int eX = minE.getX();
+                    for (Enemy obj : this.pool) {
+                        if (eX == obj.getX()) {
+                            this.endLeft.add(obj);
+                        }
+                    }
+                } else {
+                    System.err.print("no valid edge enemies");
                 }
             }
         }
 
-        if(endLeft.isEmpty()) {
-            int min = Integer.MAX_VALUE;
-            int tmpx = 0;
-            Enemy minE = null;
-            for(Enemy obj : pool) {
-                tmpx = obj.getX();
-                if( tmpx < min) {
-                    min = tmpx;
-                    minE = obj;
-                }
-            }
-            int eX = minE.getX();
-            for(Enemy obj : pool) {
-                if( eX == obj.getX()) {
-                    endLeft.add(obj);
-                }
-            }
-        }
     }
 
     public static EnemyPool getInstance() {

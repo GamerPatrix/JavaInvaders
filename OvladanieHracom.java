@@ -4,7 +4,7 @@ public class OvladanieHracom {
     private int speed;
     public OvladanieHracom() {
         this.turret = new Turret();
-        speed = 5;
+        this.speed = 5;
     }
     /*public void moveUp() {
         turret.moveY(-speed);
@@ -15,15 +15,15 @@ public class OvladanieHracom {
         System.out.println("down");
     }*/
     public void moveLeft() {
-        turret.moveX(-speed);
+        this.turret.moveX(-this.speed);
         System.out.println("left");
     }
     public void moveRight() {
-        turret.moveX(speed);
+        this.turret.moveX(this.speed);
         System.out.println("right");
     }
     public void activate() {
-        turret.shoot();
+        this.turret.shoot();
         System.out.println("shoot");
     }
     

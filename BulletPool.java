@@ -11,13 +11,13 @@ public class BulletPool {
     private ArrayList<Bullet> pool;
     //private EnemyPool enemyPool;
     public BulletPool() {
-        pool = new ArrayList<Bullet>(); 
+        this.pool = new ArrayList<Bullet>(); 
         //this.enemyPool = EnemyPool.getInstance();
     }
 
     public void bulletShoot(int x, int y, SmerNum smer) {
         System.out.println("Bullet");
-        Bullet a = new Bullet(x,y,SmerNum.up);
+        Bullet a = new Bullet(x, y, SmerNum.UP);
         this.pool.add(a); 
         System.out.println("created");
     }
@@ -27,27 +27,26 @@ public class BulletPool {
     }
 
     private void moveBullets() {
-        for(Bullet bullet : pool) {
+        for (Bullet bullet : this.pool) {
             bullet.move();
         }
     }
 
-    public void Delete (Bullet bullets) {
+    public void delete (Bullet bullets) {
         bullets.hide();
-        pool.remove(bullets);
+        this.pool.remove(bullets);
     }
 
-    public void Delete (ArrayList<Bullet> bullets) {
-        for(Bullet obj : bullets) {
-            obj.hide();
-            pool.remove(obj);
+    public void delete (ArrayList<Bullet> bullets) {
+        for (Bullet obj : bullets) {
+            this.delete(obj);
         }
     }
 
     public Bullet[] getBullets() {
         
         Bullet[] ret = new Bullet[this.pool.size()];
-        for(int i = 0; i < ret.length; i++) {
+        for (int i = 0; i < ret.length; i++) {
             ret[i] = this.pool.get(i);
         }
         return ret;

@@ -30,33 +30,32 @@ public class BoundingBox {
         this.checkSmartness();
     }
 
-    
 
     public void set(int value1, int value2, BoxEnum num) {
         //TODO in manual change size acording to the change
         switch (num) {
-            case OnlyXs:
-            this.x1 = value1;        
-            break;
-            case OnlyYs:
-            this.y1 = value1;        
-            break;
-            case manualPositionFirst:
-            this.x1 = value1;
-            this.y1 = value2;
-            break;
-            case PositionFirst:
-            this.x1 = value1;
-            this.y1 = value2;
-            break;
-            case move:
-            this.x1 = this.x1 + value1;
-            this.y1 = this.y1 + value2;
-            break;
-            case sizes:
-            this.sizeX = value1;
-            this.sizeY = value2;
-            break;
+            case ONLYXS:
+                this.x1 = value1;        
+                break;
+            case ONLYYS:
+                this.y1 = value1;        
+                break;
+            case MANUALPOSITIONFIRST:
+                this.x1 = value1;
+                this.y1 = value2;
+                break;
+            case POSITIONFIRST:
+                this.x1 = value1;
+                this.y1 = value2;
+                break;
+            case MOVE:
+                this.x1 = this.x1 + value1;
+                this.y1 = this.y1 + value2;
+                break;
+            case SIZES:
+                this.sizeX = value1;
+                this.sizeY = value2;
+                break;
 
         }
         this.checkSmartness();
@@ -65,38 +64,38 @@ public class BoundingBox {
     public void set(int value, BoxEnumSimple num) {
         switch (num) {
             case X1:
-            this.x1 = value;
-            break;
+                this.x1 = value;
+                break;
             case Y1:
-            this.y1 = value;
-            break;
-            case manualX1:
-            this.x1 = value;
-            break;
-            case manualY1:
-            this.y1 = value;
-            break;
-            case moveX:
-            this.x1 = this.x1 + value;
-            break;
-            case moveY:
-            this.y1 = this.y1 + value;
-            break;
+                this.y1 = value;
+                break;
+            case MANUALX1:
+                this.x1 = value;
+                break;
+            case MANUALY1:
+                this.y1 = value;
+                break;
+            case MOVEX:
+                this.x1 = this.x1 + value;
+                break;
+            case MOVEY:
+                this.y1 = this.y1 + value;
+                break;
         }
         this.checkSmartness();
     }
 
     //this is just a debugCheck for values that shouldnt happen
     public void checkSmartness() {
-        
-        if(x1==0 || y1==0 || sizeX==0 || sizeY==0) {
+
+        if (this.x1 == 0 || this.y1 == 0 || this.sizeX == 0 || this.sizeY == 0) {
             System.out.println("dw some shiz is 0"); 
         }
-        if(x1<0 || y1<0) {
-            System.out.println("Negative pos in BoundingBox"); 
+        if (this.x1 < 0 || this.y1 < 0) {
+            //System.out.println("Negative pos in BoundingBox"); 
         }
-        
-        if(sizeX<0 || sizeY<0) {
+
+        if (this.sizeX < 0 || this.sizeY < 0) {
             System.err.println("Negative size in BoundingBox");
         }
     }
@@ -110,11 +109,11 @@ public class BoundingBox {
     }
 
     public int getSecondX() {
-        return this.x1+sizeX;
+        return this.x1 + sizeX;
     }
 
     public int getSecondY() {
-        return this.y1+sizeY;
+        return this.y1 + sizeY;
     }
 
     public int getSizeX() {
@@ -133,15 +132,14 @@ public class BoundingBox {
     }
 
     public boolean checkInsideBox(BoundingBox box) {
-        
-        boolean checkpos1 = this.checkInsideBox(box.getFirstX(),box.getFirstY());
-        boolean checkpos2 = this.checkInsideBox(box.getSecondX(),box.getSecondY());
+
+        boolean checkpos1 = this.checkInsideBox(box.getFirstX(), box.getFirstY());
+        boolean checkpos2 = this.checkInsideBox(box.getSecondX(), box.getSecondY());
         boolean checkpos3 = this.checkInsideBox(box.getFirstX(), box.getSecondY());
         boolean checkpos4 = this.checkInsideBox(box.getSecondX(), box.getFirstY());
         return checkpos1 || checkpos2 || checkpos3 || checkpos4;
     }
-    
-    
+
 }
 /**
  * @author (PatrikZak)

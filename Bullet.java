@@ -3,10 +3,10 @@ public class Bullet extends GameObject {
     private int speed;
     public Bullet(int x , int y, SmerNum smer) {
         this.smer = smer;
-        this.SetPos(x, y);
+        this.setPos(x, y);
         this.changeImage("pics\\Bullet.png");
         this.speed = 10;
-        this.setSize(5, 10*speed);
+        this.setSize(5, 10 * this.speed);
     }
 
     /**
@@ -17,12 +17,12 @@ public class Bullet extends GameObject {
      */
     public void move() {
         switch (this.smer) {
-            case up: 
-            this.moveY(-this.speed);
-            break;
-            case down:
-            this.moveY(this.speed);
-            break;
+            case UP: 
+                this.moveY(-this.speed);
+                break;
+            case DOWN:
+                this.moveY(this.speed);
+                break;
             
         }
     }

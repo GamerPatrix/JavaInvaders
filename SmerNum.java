@@ -1,3 +1,3 @@
 public enum SmerNum {
-        up, down,
-    }
+    UP, DOWN,
+}

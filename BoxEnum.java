@@ -1,9 +1,10 @@
 public enum BoxEnum {
-        manualPositionFirst,
-        manualPositionSecond,
-        PositionFirst,
-        OnlyXs,
-        OnlyYs,
-        move,
-        sizes,
-    }
+    MANUALPOSITIONFIRST,
+    MANUALPOSITIONSECOND,
+    POSITIONFIRST,
+    ONLYXS,
+    ONLYYS,
+    MOVE,
+    SIZES;
+
+}
