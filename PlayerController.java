@@ -1,12 +1,18 @@
-public class OvladanieHracom {
+/**
+ * Write a description of class Hra here.
+ * 
+ * @author Patrik Zak 
+ * @version 2
+ */
+public class PlayerController {
     private Turret turret;
-    private static OvladanieHracom instance;
+    private static PlayerController instance;
     private int speed;
-    public OvladanieHracom() {
+    public PlayerController() {
         this.turret = new Turret();
         this.speed = 5;
     }
-    /*public void moveUp() {
+   /* public void moveUp() {
         turret.moveY(-speed);
         System.out.println("up");
     }
@@ -27,9 +33,9 @@ public class OvladanieHracom {
         System.out.println("shoot");
     }
     
-    public static OvladanieHracom getInstance() {
+    public static PlayerController getInstance() {
         if (instance == null) {
-            instance = new OvladanieHracom();  
+            instance = new PlayerController();  
         }
         return instance;
     }

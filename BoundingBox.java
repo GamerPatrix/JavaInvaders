@@ -1,6 +1,8 @@
-
 /**
- * @author (PatrikZak)
+ * Write a description of class Hra here.
+ * 
+ * @author Patrik Zak 
+ * @version 3
  */
 public class BoundingBox {
     // instance variables - replace the example below with your own
@@ -91,9 +93,9 @@ public class BoundingBox {
         if (this.x1 == 0 || this.y1 == 0 || this.sizeX == 0 || this.sizeY == 0) {
             System.out.println("dw some shiz is 0"); 
         }
-        if (this.x1 < 0 || this.y1 < 0) {
-            //System.out.println("Negative pos in BoundingBox"); 
-        }
+        // if (this.x1 < 0 || this.y1 < 0) {
+            // System.out.println("Negative pos in BoundingBox"); 
+        // }
 
         if (this.sizeX < 0 || this.sizeY < 0) {
             System.err.println("Negative size in BoundingBox");
@@ -132,7 +134,6 @@ public class BoundingBox {
     }
 
     public boolean checkInsideBox(BoundingBox box) {
-
         boolean checkpos1 = this.checkInsideBox(box.getFirstX(), box.getFirstY());
         boolean checkpos2 = this.checkInsideBox(box.getSecondX(), box.getSecondY());
         boolean checkpos3 = this.checkInsideBox(box.getFirstX(), box.getSecondY());

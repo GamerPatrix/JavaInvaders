@@ -1,24 +1,23 @@
 
 /**
- * @version (a version number or a date)
- * Write a description of class casovac here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Fri 
  */
-public class Casovac {
+public class StopWatch {
     private int pocetTikov = 0;
     private int maxPocetTikov = 0;
     private boolean isActive;
-    private Hra h;
-    public Casovac(Hra h) {
+    private Game h;
+    public StopWatch(Game h) {
         this.h = h;
     }
+
     public void start (int paMax) {
         this.maxPocetTikov = paMax;
         this.pocetTikov = 0;
         this.isActive = true;
     }
+
     public void update() {
         if (this.isActive) {
             this.pocetTikov++;
@@ -27,6 +26,7 @@ public class Casovac {
             }
         }
     }
+
     public void stop() {
         this.isActive = false;
         if (this.h != null) {

@@ -1,22 +1,23 @@
+/** 
+ * @author Patrik Zak 
+ * @version 6
+ */
 public class Bullet extends GameObject {
-    private SmerNum smer;
+    private DirectionNum direction;
     private int speed;
-    public Bullet(int x , int y, SmerNum smer) {
-        this.smer = smer;
+    public Bullet(int x , int y, DirectionNum direction) {
+        this.direction = direction;
         this.setPos(x, y);
         this.changeImage("pics\\Bullet.png");
         this.speed = 10;
-        this.setSize(5, 10 * this.speed);
+        this.setSize(5, 10 + this.speed);
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Moves the bullet in the desired direction 
      */
     public void move() {
-        switch (this.smer) {
+        switch (this.direction) {
             case UP: 
                 this.moveY(-this.speed);
                 break;

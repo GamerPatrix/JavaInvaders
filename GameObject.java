@@ -1,4 +1,11 @@
 import fri.shapesge.Image;
+/**
+ * This class manages its own Image and holds the objects position
+ * Any object with a visual representation should extend this class
+ * 
+ * @author Patrik Zak 
+ * @version 5
+ */
 public abstract class GameObject {
     private BoundingBox box;
     private Image image;
@@ -58,7 +65,13 @@ public abstract class GameObject {
     public int getEndY() {
         return this.getBox().getSecondY();
     }
-
+    /**
+     * checks if the given position intersects this object's bounding box
+     *
+     * @param  x  X part of the position
+     * @param  Y  Y part of the position
+     * @return    true, if intersects
+     */
     public boolean checkColision(int x, int y) {
         return this.getBox().checkInsideBox(x, y);
     }

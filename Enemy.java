@@ -1,3 +1,9 @@
+/**
+ * This class represents a shooteble object that the player needs to shoot to win
+ * 
+ * @author Patrik Zak 
+ * @version 2
+ */
 public class Enemy extends GameObject {
     // instance variables - replace the example below with your own
     private EnemyType type;

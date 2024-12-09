@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 /**
- * Write a description of class BulletPool here.
+ * Write a description of class Hra here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrik Zak 
+ * @version 4
  */
 public class BulletPool {
     private static BulletPool instance;
@@ -14,10 +14,12 @@ public class BulletPool {
         this.pool = new ArrayList<Bullet>(); 
         //this.enemyPool = EnemyPool.getInstance();
     }
-
-    public void bulletShoot(int x, int y, SmerNum smer) {
+    /**
+     * Creates a bullet at the specified position and in direction of DirectionNum
+     */
+    public void bulletShoot(int x, int y, DirectionNum direction) {
         System.out.println("Bullet");
-        Bullet a = new Bullet(x, y, SmerNum.UP);
+        Bullet a = new Bullet(x, y, direction);
         this.pool.add(a); 
         System.out.println("created");
     }

@@ -1,9 +1,8 @@
-
 /**
- * Write a description of class Button here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * represents objects clickable with a mouse
+ * 
+ * @author Patrik Zak 
+ * @version 1
  */
 public class Button extends GameObject {
     public Button() {

@@ -6,13 +6,10 @@ public abstract class Main {
     
     public static void main() {
         
-        new MainMenu();
-        System.out.println("main"); 
-    }
-    
-    public static void mainHra() {
+        //new MainMenu();
+        // System.out.println("main"); 
         
-        Hra.getInstance().start();
+        Game.getInstance().start();
         System.out.println("hra"); 
     }
 }

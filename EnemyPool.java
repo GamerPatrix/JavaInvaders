@@ -1,15 +1,17 @@
 import java.util.ArrayList;
 /**
- * Write a description of class EnemyPool here.
+ * Write a description of class Hra here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrik Zak 
+ * @version 3
  */
 public class EnemyPool {
     private static EnemyPool instance;
+    
     private ArrayList<Enemy> pool;
     private ArrayList<Enemy> endLeft;
     private ArrayList<Enemy> endRight;
+    
     private int allwedMoveDistance;
     private int actualMoveDistance;
     private boolean isright;

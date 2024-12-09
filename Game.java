@@ -3,22 +3,23 @@ import fri.shapesge.Manager;
 /**
  * Write a description of class Hra here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrik Zak 
+ * @version 3
  */
-public class Hra {
-    private static Hra instance;
+public class Game {
+    private static Game instance;
     private static GameState gameState;
     private Manager manager;
     //private Casovac cas;
     private boolean isRunnung;
     private ArrayList<Object> objekty;
-    public Hra() {
+    
+    public Game() {
         this.manager = MyManager.getInstance();
         this.objekty = new ArrayList<Object>();
         this.objekty.add(BulletPool.getInstance());
         this.objekty.add(EnemyPool.getInstance());
-        this.objekty.add(OvladanieHracom.getInstance());
+        this.objekty.add(PlayerController.getInstance());
         //this.cas = new Casovac(this);
         this.manager.manageObject(this);
 
@@ -31,7 +32,6 @@ public class Hra {
         this.checkCollisions();
         this.tryMoveEnemies();
         this.tryMoveBullets();
-
     }
 
     private void tryMoveEnemies() {
@@ -48,7 +48,7 @@ public class Hra {
 
     public void end() {
         this.isRunnung = false;
-
+        System.exit(0);
     }
 
     public void hideGame() {
@@ -66,7 +66,7 @@ public class Hra {
         this.manager.manageObject(this);
     }
 
-    //TODO is called 3 by hra on enter idk why
+    //TODO is called 3 times by hra on enter idk why
     public void enter() {
         System.out.print("enemy");
         EnemyPool.getInstance().createEnemyGrid(40, 5, 5);
@@ -76,7 +76,10 @@ public class Hra {
     public void escape() {
         this.end();
     }
-
+    
+    /**
+     * TODO NOT YET IMPLEMENTED
+     */
     public void goToMainMenu() {
         if (this.isRunnung) {
             this.end();  
@@ -85,9 +88,9 @@ public class Hra {
         this.gameState = GameState.MainMenu;
     }
 
-    public static Hra getInstance() {
+    public static Game getInstance() {
         if (instance == null) {
-            instance = new Hra();  
+            instance = new Game();  
         }
         return instance;
     }
@@ -95,8 +98,5 @@ public class Hra {
     public static GameState getGameState() {
         GameState ret = gameState;
         return ret;
-    }
-    public enum GameState {
-        MainMenu, Paused, Running,
-    }
+    } 
 }

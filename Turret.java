@@ -1,3 +1,9 @@
+/**
+ * Write a description of class Hra here.
+ * 
+ * @author Patrik Zak 
+ * @version 7
+ */
 public class Turret extends GameObject {
     private BulletPool bulletPool;
     
@@ -13,12 +19,13 @@ public class Turret extends GameObject {
         this.setPos(x, y);
     }
     
+    /** 
+     * uses BulletPool to shoot bullets
+     */
     public void shoot() {
         
         int x = this.getX() + (this.getSizeX() / 2);
         int y = this.getY() + 2;
-        this.bulletPool.bulletShoot(x, y, SmerNum.UP);
+        this.bulletPool.bulletShoot(x, y, DirectionNum.UP);
     }
-    
-    
 }

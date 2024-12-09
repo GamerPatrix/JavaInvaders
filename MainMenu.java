@@ -1,9 +1,14 @@
 import fri.shapesge.Manager;
 import java.util.ArrayList;
-
+/**
+ * MainMenu NOT YET IMPLEMENTED
+ * 
+ * @author Patrik Zak 
+ * @version 1
+ */
 public class MainMenu {
     private Manager manager;
-    private Hra game;
+    private Game game;
     private ArrayList<Button> buttons;
     public MainMenu() {
         this.manager = MyManager.getInstance();
@@ -23,7 +28,7 @@ public class MainMenu {
 
     public void gameTime() {
         if (this.game == null) {
-            this.game = Hra.getInstance();
+            this.game = Game.getInstance();
         }
         this.game.start();  
         this.manager.stopManagingObject(this);
