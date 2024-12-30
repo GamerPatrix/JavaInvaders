@@ -12,5 +12,4 @@ public enum BoxEnum {
     ONLYYS,
     MOVE,
     SIZES;
-
 }

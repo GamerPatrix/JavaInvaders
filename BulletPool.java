@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Patrik Zak 
  * @version 4
  */
-public class BulletPool {
+public class BulletPool /*implements iGameLogic*/ {
     private static BulletPool instance;
     private ArrayList<Bullet> pool;
     //private EnemyPool enemyPool;
@@ -14,6 +14,7 @@ public class BulletPool {
         this.pool = new ArrayList<Bullet>(); 
         //this.enemyPool = EnemyPool.getInstance();
     }
+
     /**
      * Creates a bullet at the specified position and in direction of DirectionNum
      */
@@ -46,7 +47,7 @@ public class BulletPool {
     }
 
     public Bullet[] getBullets() {
-        
+
         Bullet[] ret = new Bullet[this.pool.size()];
         for (int i = 0; i < ret.length; i++) {
             ret[i] = this.pool.get(i);
@@ -54,9 +55,20 @@ public class BulletPool {
         return ret;
 
     }
-    
+
     public Bullet getBullet(int a) {
         return this.pool.get(a);
+    }
+
+    public void clear() {
+        for (Bullet obj : this.pool) {
+            obj.hide();
+        }
+        this.pool.clear();
+    }
+
+    public void myInit() {
+        
     }
 
     public static BulletPool getInstance() {
@@ -65,5 +77,5 @@ public class BulletPool {
         }
         return instance;
     }
-    
+
 }

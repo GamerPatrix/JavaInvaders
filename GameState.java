@@ -4,5 +4,5 @@
  * @version 1
  */
 public enum GameState {
-    MainMenu, Paused, Running,
+    MAIN_MENU, PAUSED, RUNNING,
 }

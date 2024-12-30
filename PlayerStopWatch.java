@@ -3,13 +3,13 @@
  * 
  * @author Fri 
  */
-public class StopWatch {
+public class PlayerStopWatch {
     private int pocetTikov = 0;
     private int maxPocetTikov = 0;
     private boolean isActive;
-    private Game h;
-    public StopWatch(Game h) {
-        this.h = h;
+    private PlayerController controller;
+    public PlayerStopWatch(PlayerController controller) {
+        this.controller = controller;
     }
 
     public void start (int paMax) {
@@ -18,7 +18,7 @@ public class StopWatch {
         this.isActive = true;
     }
 
-    public void update() {
+    public void tick() {
         if (this.isActive) {
             this.pocetTikov++;
             if ( this.pocetTikov == this.maxPocetTikov) {
@@ -29,8 +29,8 @@ public class StopWatch {
 
     public void stop() {
         this.isActive = false;
-        if (this.h != null) {
-            this.h.end();
+        if (this.controller != null) {
+            this.controller.canFireAgain();
         }
     }
 }

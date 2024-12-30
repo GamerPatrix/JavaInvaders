@@ -1,15 +1,11 @@
 public abstract class Main {
     
-    public Main() {
+    public static void main(String[] args) {
         
-    }
-    
-    public static void main() {
-        
-        //new MainMenu();
+        MainMenu.getInstance();
         // System.out.println("main"); 
         
-        Game.getInstance().start();
-        System.out.println("hra"); 
+        //Game.getInstance().start();
+        System.out.println("main"); 
     }
 }

@@ -31,6 +31,7 @@ public class Collisions {
                 if (y < 0) {
                     //bullet has reached the top of the window
                     bulletsDelete.add(bullet);
+                    StatsManager.getInstance().addMiss();
                     continue;
                 }
                 int x = bullet.getX();
@@ -38,10 +39,12 @@ public class Collisions {
                 //enemyForEach:
                 for (Enemy enemy : enemies) {                
                     if (enemy.checkColision(x, y)) {
-                        //the bullet has hit this enemy
+                        ///the bullet has hit this enemy
+                        
                         //System.out.println("hit");
                         enemiesDelete.add(enemy);
                         bulletsDelete.add(bullet);
+                        StatsManager.getInstance().addHit();
                         //break enemyForEach;
 
                     }

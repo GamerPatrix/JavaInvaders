@@ -3,21 +3,24 @@ import java.util.ArrayList;
  * Write a description of class Hra here.
  * 
  * @author Patrik Zak 
- * @version 3
+ * @version 6
  */
-public class EnemyPool {
+public class EnemyPool /*implements iGameLogic*/ {
     private static EnemyPool instance;
-    
+
     private ArrayList<Enemy> pool;
     private ArrayList<Enemy> endLeft;
     private ArrayList<Enemy> endRight;
-    
+
     private int allwedMoveDistance;
     private int actualMoveDistance;
     private boolean isright;
     private int speed;
-    private int minHeight;
+    private int lowestHeight;
     private int rightSide;
+    
+    private int numberOfAttemptsR;
+    private int numberOfAttemptsL;
     private EnemyPool() {
         this.pool = new ArrayList<Enemy>(); 
         this.endLeft = new ArrayList<Enemy>(); 
@@ -26,12 +29,12 @@ public class EnemyPool {
         this.allwedMoveDistance = 10;
         this.actualMoveDistance = 0;
         this.isright = true;
-        this.minHeight = 90;        
+        this.lowestHeight = 0;        
         this.rightSide = 1000;
-    }
-
+    }   
+    
     public int getMinHeight() {
-        return this.minHeight;
+        return this.lowestHeight;
     }
 
     private Enemy createEnemy(int x, int y) {
@@ -40,9 +43,12 @@ public class EnemyPool {
         this.pool.add(a);
         return a;
     }
-    //move is supposed to be different
+
     public void update() {
-        if (this.checkEdge()) {
+        if (this.pool.isEmpty()) {
+            this.noEnemiesLeft();
+        }
+        if (this.isFurtherThanEdge()) {
             this.isright = !this.isright;
             for (Enemy obj : this.pool) {
                 obj.moveY(this.speed);
@@ -81,7 +87,7 @@ public class EnemyPool {
         enemy.hide();
         //when hide is called only once it doesnt hide
         enemy.hide();
-        
+
         if (this.endLeft.contains(enemy)) {
             this.endLeft.remove(enemy);
         }
@@ -89,11 +95,11 @@ public class EnemyPool {
             this.endRight.remove(enemy);
         }
         this.pool.remove(enemy);
-        
+
         this.numberOfAttemptsR = 0;
         this.numberOfAttemptsL = 0;
         this.checkEdgeArrays();
-        
+
     }
 
     public void delete (ArrayList<Enemy> enemies) {
@@ -124,7 +130,8 @@ public class EnemyPool {
 
     }
 
-    private boolean checkEdge() {
+     
+    private boolean isFurtherThanEdge() {
         if (this.isright) {
             for (Enemy obj : this.endRight) {
                 if (obj.getEndX() > this.rightSide) {
@@ -143,16 +150,14 @@ public class EnemyPool {
 
     }
 
-    private int numberOfAttemptsR;
-    private int numberOfAttemptsL;
+    
     private void checkEdgeArrays() {
-        //najdi najvedcise potom ziskaj vsetky v rovnakej vzdialenosti
         this.checkEdgeArrays(true);
         this.checkEdgeArrays(false);
     }
-
-    private void checkEdgeArrays(boolean isRight) {
-        if (this.isright) {
+    
+    private void checkEdgeArrays(boolean isCheckingRight) {
+        if (isCheckingRight) {
             if (this.endRight.isEmpty()) {
                 int max = Integer.MIN_VALUE;
                 int tmpx = 0;
@@ -208,6 +213,26 @@ public class EnemyPool {
 
     }
 
+    public void clear() {
+        MyManager.getInstance().stopManagingObject(this);
+        for (Enemy obj : this.pool) {
+            obj.hide();
+        }
+        this.pool.clear();
+    }
+
+    public void myInit() {
+        this.isright = true;
+    }
+    
+    private void noEnemiesLeft() {
+        Game.getInstance().win();
+    }
+    
+    private void enemyReachedBottom() {
+        Game.getInstance().lose();
+    }
+    
     public static EnemyPool getInstance() {
         if (instance == null) {
             instance = new EnemyPool();  
